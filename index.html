@@ -1,0 +1,103 @@
+<html>
+  <head>
+    <script src="script.js"></script>
+    <script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-particle-system-component@1.0.x/dist/aframe-particle-system-component.min.js"></script>
+  </head>
+  
+<script> 
+  function sceneChangeAdder(componentName,id,scene,choice1,choice2){
+    AFRAME.registerComponent(componentName, { 
+      init: function () {
+        var diamondtree = document.getElementById(id);
+        var video_element = document.getElementById("video");
+        var el = this.el;
+        el.addEventListener('mouseenter', function () {
+          el.setAttribute('color', "lightblue");
+          video_element.setAttribute("src",scene)
+          var x = document.getElementsByClassName("initialChooser")
+          for (let i = 0; i < x.length; i++){
+            x[i].setAttribute('visible',false)
+          }
+          setTimeout(function(){
+            video_element.pause();
+            let myChoice1 = document.getElementById(choice1);
+            let myChoice2 = document.getElementById(choice2);
+            myChoice1.setAttribute("visible",true)
+            myChoice2.setAttribute("visible",true)
+            myChoice1.addEventListener('mouseenter', function () {
+              myChoice1.setAttribute("visible",false)
+              myChoice2.setAttribute("visible",false)
+            })
+            myChoice2.addEventListener('mouseenter', function () {
+              myChoice1.setAttribute("visible",false)
+              myChoice2.setAttribute("visible",false)
+            })
+            //Switch to the proper scene based on the choice you made
+          },5000)
+        });
+      }
+    })
+  }
+  
+  //I HAVE NOT PUT IN THE CORRECT SCENES FOR IT TO SWITCH TO
+  
+  //above Patrick
+  sceneChangeAdder("change-color+scene-on-hover1","introtree1","https://cdn.glitch.com/609cd488-a724-4d2e-abdd-065d8089b2b2%2F03_SaveCat.mp4?v=1569430348837","fruitChoice1","fruitChoice2")
+  
+  //above
+  sceneChangeAdder("change-color+scene-on-hover2","introtree2","https://cdn.glitch.com/609cd488-a724-4d2e-abdd-065d8089b2b2%2FIntro_01.mp4?v=1569431828643","fruitChoice1","fruitChoice2")
+  
+  //above
+  sceneChangeAdder("change-color+scene-on-hover3","introtree3","https://cdn.glitch.com/609cd488-a724-4d2e-abdd-065d8089b2b2%2F01_Choice1SaveCat.mp4?v=1569431525891","fruitChoice1","fruitChoice2")
+  
+  //above
+  sceneChangeAdder("change-color+scene-on-hover4","introtree4","https://cdn.glitch.com/609cd488-a724-4d2e-abdd-065d8089b2b2%2F01_Choice1_.mp4?v=1569431566895","fruitChoice1","fruitChoice2")
+</script>
+
+  
+  <body>
+    <a-scene>
+      <a-camera><a-cursor></a-cursor></a-camera>
+      <video id="video" src="https://cdn.glitch.com/609cd488-a724-4d2e-abdd-065d8089b2b2%2F00_Beginning.mp4?v=1569428845148"
+               crossorigin="anonymous" autoplay loop ></video>
+      <a-videosphere src="#video" color="#0000"></a-videosphere>
+  
+      <!––above Patrick--!>
+      <a-octahedron 
+           id="introtree1"
+           class="initialChooser"
+           color="#ffa500" position="3.7 3 -6" scale="0.25 0.4 0.25" rotation="0 25 0"
+           change-color+scene-on-hover1="">
+      </a-octahedron>
+      
+      <!––above --!>
+      <a-octahedron 
+           id="introtree2"
+           class="initialChooser"
+           color="#0F225E" position="-3.6 2.3 -2" scale="0.125 0.2 0.125" rotation="0 25 0"
+           change-color+scene-on-hover2="">
+      </a-octahedron>
+      
+      <!––above --!>
+      <a-octahedron 
+           id="introtree3"
+           class="initialChooser"
+           color="#0F920E" position="3.6 2.3 2.6" scale="0.125 0.2 0.125" rotation="0 25 0"
+           change-color+scene-on-hover3="">
+      </a-octahedron>
+      
+      <!––above --!>
+      <a-octahedron 
+           id="introtree4"
+           class="initialChooser"
+           color="#EF2D5E" position="-3.6 2.4 1.85" scale="0.125 0.2 0.125" rotation="0 25 0" 
+           change-color+scene-on-hover4="">
+      </a-octahedron>
+      
+      <a-entity id="fruitChoice1" color="#000000" position="0.7 3 -6" scale="8 8 8" visible="false" text="value: Take the Fruit!;"></a-entity>
+      <a-entity id="fruitChoice2" color="#000000" position="3.7 3 -6" scale="8 8 8" visible="false" text="value: Scratch Him!;"></a-entity>
+      
+    </a-scene>
+  </body>
+</html>
